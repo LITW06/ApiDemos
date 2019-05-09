@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+        <input id="month" class="form-control" placeholder="Month" />
+        <br />
+        <input id="day" class="form-control" placeholder="Day" />
+        <br />
+        <input id="year" class="form-control" placeholder="Year" />
+        <br />
+        <button id="convert" class="btn btn-primary">Convert</button>
+        <h3 id="result"></h3>
+    </div>
+</div>
+
+@section scripts {
+
+    <script>
+        $(() => {
+            $("#convert").on('click',
+                () => {
+                    const year = $("#year").val();
+                    const month = $("#month").val();
+                    const day = $("#day").val();
+                    $.get('/home/convert',
+                        { dateTime: `${month}/${day}/${year}` },
+                        result => {
+                            $("#result").text(`${result.hd}-${result.hm}-${result.hy}`);
+                        });
+                });
+        })
+    </script>
+
+}
